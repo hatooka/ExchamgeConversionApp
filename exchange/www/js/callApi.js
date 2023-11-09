@@ -33,7 +33,6 @@ function createCurrencyList(){
 };
 
 function callConvertApi(){
-    currencies
     var request = new XMLHttpRequest();
     var path = "https://currencyapi.net/api/v1/rates?key=" + apiKey;
     let from = document.getElementById("from");
@@ -51,7 +50,6 @@ function callConvertApi(){
     var toRate = 1.0;
     request.addEventListener("load", function(){
         const data = JSON.parse(this.responseText);
-        console.log(data);
         for(var key of Object.keys(data.rates)){
             if (key == fromValue){
                 fromRate = data.rates[key]
@@ -60,12 +58,8 @@ function callConvertApi(){
                 toRate = data.rates[key]
             }
         };
-        console.log(fromRate);
-        console.log(toRate);
-        console.log(amount/fromRate*toRate);
         var result = document.getElementById("result");
-        result.innerHTML = amount/fromRate*toRate + to.options[toIdx].text;
-
+        result.innerHTML = Math.round(amount/fromRate*toRate * 100)/100 + to.options[toIdx].text;
     });
 
     request.addEventListener("error", function(){
