@@ -38,9 +38,12 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
+        <title>為替変換アプリ</title>
     </head>
     <body>
+        <header>
+            <h1>為替変換アプリ</h1>
+        </header>
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
@@ -48,8 +51,8 @@
                 <p class="event received">Device is Ready</p>
             </div>
                 <div>
-                    <label>金額：<input id="amount" type='number' size="20" placeholder="金額を入力してください"></label><br>
-                    <label>from:
+                    <label for="amount">金額：<input id="amount" type='number' size="20" placeholder="金額を入力してください"></label><br>
+                    <label for="from">from:
                         <select id="from">
                         </select>
                     </label><br>
@@ -59,7 +62,7 @@
                     </label><br>
                 </div>
                 <div>
-                    <input type="button" value="リクエスト" onclick="callConvertApi()">
+                    <input type="button" value="変換する" onclick="callConvertApi()">
                 </div>
                 <div>
                     <label id="result">算出結果</label>

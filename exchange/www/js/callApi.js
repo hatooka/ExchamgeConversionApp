@@ -24,10 +24,11 @@ function createCurrencyList(){
         var option = document.createElement("option");
         option.text = element.label;
         option.value = element.value;
+        from.appendChild(option);
+
         var option2 = document.createElement("option");
         option2.text = element.label;
         option2.value = element.value;
-        from.appendChild(option);
         to.appendChild(option2);
     });
 };
@@ -37,7 +38,7 @@ function callConvertApi(){
     let to = document.getElementById("to");
     let toIdx = to.selectedIndex;
     let amount = parseInt(document.getElementById("amount").value);
-    
+
     var request = new XMLHttpRequest();
     var path = "https://currencyapi.net/api/v1/rates?key=" + apiKey;
 
