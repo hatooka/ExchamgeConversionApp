@@ -33,32 +33,34 @@ function createCurrencyList(){
 };
 
 function callConvertApi(){
-    var request = new XMLHttpRequest();
-    var path = "https://currencyapi.net/api/v1/rates?key=" + apiKey;
     let from = document.getElementById("from");
     let to = document.getElementById("to");
-    var fromIdx = from.selectedIndex;
-    var toIdx = to.selectedIndex;
+    let toIdx = to.selectedIndex;
     let amount = parseInt(document.getElementById("amount").value);
-    var fromValue = from.options[fromIdx].value;
-    var toValue = to.options[toIdx].value;
+    
+    var request = new XMLHttpRequest();
+    var path = "https://currencyapi.net/api/v1/rates?key=" + apiKey;
 
     request.open("GET",path);
     request.send();
 
-    var fromRate = 1.0;
-    var toRate = 1.0;
+
     request.addEventListener("load", function(){
         const data = JSON.parse(this.responseText);
+        var fromRate = 1.0;
+        var toRate = 1.0;
         for(var key of Object.keys(data.rates)){
-            if (key == fromValue){
+            // api/v1/ratesの基準がUSドルなのでUSDが選択されている場合は１倍のまま
+            if (from.value != "USD" && key == from.value){
                 fromRate = data.rates[key]
             }
-            if (key == toValue){
+            if (to.value != "USD" && key == to.value){
                 toRate = data.rates[key]
             }
         };
         var result = document.getElementById("result");
+
+        //小数第3位で四捨五入して表示
         result.innerHTML = Math.round(amount/fromRate*toRate * 100)/100 + to.options[toIdx].text;
     });
 
