@@ -28,7 +28,11 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self' 'unsafe-inline' https://currencyapi.net data: https://ssl.gstatic.com 'unsafe-eval'; 
+            script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline'; media-src *; 
+        img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -44,22 +48,37 @@
                 <p class="event received">Device is Ready</p>
             </div>
                 <div>
-                    <label>金額：<input type='text' size="20" placeholder="金額を入力してください"></label><br>
+                    <label>金額：<input id="amount" type='text' size="20" placeholder="金額を入力してください"></label><br>
+                    <label>form:
+                        <select id="from">
+                            <option value="JPY">円</option>
+                            <option value="USD">ドル</option>
+                            <option value="EUR">ユーロ</option>
+                            <option value="GBP">ポンド</option>
+                            <option value="AUD">オーストラリアドル</option>
+                            <option value="CAD">カナダドル</option>
+                        </select>
+                    </label><br>
                     <label>to:
-                        <select>
-                            <option value="円">円</option>
-                            <option value="ドル">ドル</option>
+                        <select id="to">
+                            <option value="JPY">円</option>
+                            <option value="USD">ドル</option>
+                            <option value="EUR">ユーロ</option>
+                            <option value="GBP">ポンド</option>
+                            <option value="AUD">オーストラリアドル</option>
+                            <option value="CAD">カナダドル</option>
                         </select>
                     </label><br>
-                    <label>from:
-                        <select>
-                            <option value="円">円</option>
-                            <option value="ドル">ドル</option>
-                        </select>
-                    </label><br>
+                </div>
+                <div>
+                    <input type="button" value="リクエスト" onclick="callConvertApi()">
+                </div>
+                <div>
+                    <label id="result">算出結果</label>
                 </div>
         </div>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/callApi.js"></script>
     </body>
 </html>
