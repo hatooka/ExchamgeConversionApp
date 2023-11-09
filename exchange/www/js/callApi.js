@@ -27,10 +27,11 @@ function createCurrencyList(){
         var option2 = document.createElement("option");
         option2.text = element.label;
         option2.value = element.value;
-        to.appendChild(option2);
         from.appendChild(option);
+        to.appendChild(option2);
     });
 };
+
 function callConvertApi(){
     currencies
     var request = new XMLHttpRequest();
@@ -52,10 +53,10 @@ function callConvertApi(){
         const data = JSON.parse(this.responseText);
         console.log(data);
         for(var key of Object.keys(data.rates)){
-            if (key==fromValue){
+            if (key == fromValue){
                 fromRate = data.rates[key]
             }
-            if (key==toValue){
+            if (key == toValue){
                 toRate = data.rates[key]
             }
         };
