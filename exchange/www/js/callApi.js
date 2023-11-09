@@ -1,7 +1,38 @@
 const apiKey = "VNz2AbfhiSZ1t9FEpd0OXlnVAUchQ96daRNq";
 
+const currencies = [
+    {value: "JPY",label: "円"},
+    {value: "USD",label: "ドル"},
+    {value: "EUR",label:"ユーロ"},                            
+    {value: "GBP",label:"ポンド"},
+    {value: "AUD",label:"オーストラリアドル"},
+    {value: "CAD",label:"カナダドル"},
+    {value: "CNY",label:"元"},
+    {value: "KRW",label:"ウォン"},
+    {value: "INR",label:"ルピー"},
+    {value: "THB",label:"バーツ"},
+    {value: "PHP",label:"ペソ"},
+    {value: "BRL",label:"レアル"},
+    {value: "CHF",label:"フラン"},
+    {value: "AED",label:"ディルハム"},
+]
 
+function createCurrencyList(){
+    let from = document.getElementById("from");
+    let to = document.getElementById("to");
+    currencies.forEach(function(element){
+        var option = document.createElement("option");
+        option.text = element.label;
+        option.value = element.value;
+        var option2 = document.createElement("option");
+        option2.text = element.label;
+        option2.value = element.value;
+        to.appendChild(option2);
+        from.appendChild(option);
+    });
+};
 function callConvertApi(){
+    currencies
     var request = new XMLHttpRequest();
     var path = "https://currencyapi.net/api/v1/rates?key=" + apiKey;
     let from = document.getElementById("from");
@@ -40,3 +71,5 @@ function callConvertApi(){
         console.error("error occured");
     });
 }
+
+window.onload = createCurrencyList()
