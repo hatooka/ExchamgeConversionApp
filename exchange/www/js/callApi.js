@@ -22,12 +22,12 @@ function createCurrencyList(){
     let to = document.getElementById("to");
     currencies.forEach(function(element){
         var option = document.createElement("option");
-        option.text = element.label;
+        option.text = element.label + "(" + element.value + ")";
         option.value = element.value;
         from.appendChild(option);
 
         var option2 = document.createElement("option");
-        option2.text = element.label;
+        option2.text = element.label + "(" + element.value + ")";
         option2.value = element.value;
         to.appendChild(option2);
     });
@@ -61,13 +61,33 @@ function callConvertApi(){
         };
         var result = document.getElementById("result");
 
-        //小数第3位で四捨五入して表示
-        result.innerHTML = Math.round(amount/fromRate*toRate * 100)/100 + to.options[toIdx].text;
+        // 小数第3位で四捨五入して表示
+        result.innerHTML = Math.round(amount/fromRate*toRate * 100)/100 + " " +  to.options[toIdx].value;
     });
 
     request.addEventListener("error", function(){
         console.error("error occured");
     });
+}
+
+function clickButton(){
+    // バリデーションチェック
+    var check = false;
+    let amount = parseInt(document.getElementById("amount").value);
+    let errMesageLabel = document.getElementById("errMessage");
+    if (isNaN(amount)|| amount == undefined){
+        errMesageLabel.innerHTML = "金額が入力されていません";
+        check = true
+    }else if( amount <=0 ){
+        errMesageLabel.innerHTML = "０より大きい数字を入力してください";
+        check = true
+    }
+
+    errMesageLabel.hidden = !check
+
+    if (!check){
+        callConvertApi()
+    }
 }
 
 window.onload = createCurrencyList()

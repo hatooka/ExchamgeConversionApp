@@ -38,35 +38,40 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
         <link rel="stylesheet" href="css/index.css">
-        <title>為替変換アプリ</title>
+        <title>為替計算アプリ</title>
     </head>
     <body>
         <header>
             <h1>為替変換アプリ</h1>
+            <link rel="stylesheet" href="css/style.css">
         </header>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+        <div>
+            <div class="container">
+                <div class="input-container">
+                    <label for="amount">金額：</label>
+                    <input id="amount" type='number' size="20" placeholder="金額を入力してください">
+                </div>
+                <div class="errorMassage">
+                    <label id="errMessage" hidden></label>
+                </div>
+                <div class="input-container">
+                    <select id="from"></select>
+                    <label for="from">から</label>
+                </div>
+                <div class="input-container">
+                    <select id="to"></select>
+                    <label>に</label>
+                </div>
+                <div class="input-container">
+                    <button onclick="clickButton()">変換する</button>
+                </div>
+                <div class="input-container">
+                    <label>算出結果</label>
+                </div>
+                <div class="input-container">
+                    <label id="result"></label>
+                </div>
             </div>
-                <div>
-                    <label for="amount">金額：<input id="amount" type='number' size="20" placeholder="金額を入力してください"></label><br>
-                    <label for="from">from:
-                        <select id="from">
-                        </select>
-                    </label><br>
-                    <label>to:
-                        <select id="to">
-                        </select>
-                    </label><br>
-                </div>
-                <div>
-                    <input type="button" value="変換する" onclick="callConvertApi()">
-                </div>
-                <div>
-                    <label id="result">算出結果</label>
-                </div>
         </div>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
